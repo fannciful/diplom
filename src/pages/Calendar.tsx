@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -20,7 +20,7 @@ import { format, isSameDay } from 'date-fns';
 
 type Event = {
   id: string;
-  title: string;
+  title: string; // тут ключ для перекладу
   date: string;
   type: 'task' | 'meeting' | 'deadline';
 };
@@ -28,19 +28,19 @@ type Event = {
 const mockEvents: Event[] = [
   {
     id: '1',
-    title: 'Консультація з керівником',
+    title: 'calendar.mockEvents.meeting1', // ключ перекладу
     date: new Date().toISOString(),
     type: 'meeting'
   },
   {
     id: '2',
-    title: 'Здати перший розділ',
+    title: 'calendar.mockEvents.deadline1', // ключ перекладу
     date: new Date().toISOString(),
     type: 'deadline'
   },
   {
     id: '3',
-    title: 'Проміжне тестування',
+    title: 'calendar.mockEvents.task1', // ключ перекладу
     date: new Date(new Date().setDate(new Date().getDate() + 2)).toISOString(),
     type: 'task'
   }
@@ -53,17 +53,6 @@ const CalendarPage = () => {
   const filteredEvents = mockEvents.filter(event =>
     isSameDay(new Date(event.date), selectedDate)
   );
-
-  const getBadge = (type: Event['type']) => {
-    switch (type) {
-      case 'task':
-        return <Badge variant="secondary">Завдання</Badge>;
-      case 'meeting':
-        return <Badge variant="default">Зустріч</Badge>;
-      case 'deadline':
-        return <Badge variant="destructive">Дедлайн</Badge>;
-    }
-  };
 
   return (
     <div className="min-h-screen bg-background flex">
@@ -83,8 +72,8 @@ const CalendarPage = () => {
               <div className="flex items-center gap-2">
                 <CalendarIcon className="text-blue-500 w-7 h-7" />
                 <div>
-                  <h1 className="text-3xl font-bold text-foreground">{t('calendar.title')}</h1>
-                  <p className="text-muted-foreground text-sm">{t('calendar.description')}</p>
+                  <h1 className="text-3xl font-bold text-foreground">{t('calendar.pageTitle')}</h1>
+                  <p className="text-muted-foreground text-sm">{t('calendar.pageDescription')}</p>
                 </div>
               </div>
               <Button className="px-4 py-2 shadow-md" size="lg">
@@ -93,14 +82,14 @@ const CalendarPage = () => {
               </Button>
             </div>
 
-
             {/* Календар + події */}
             <div className="grid md:grid-cols-2 gap-10">
+              {/* Ліва колонка — Календар */}
               <div className="w-full">
                 <Card className="shadow-md">
                   <CardHeader>
-                    <CardTitle>Календар</CardTitle>
-                    <CardDescription>Оберіть дату для перегляду подій</CardDescription>
+                    <CardTitle>{t('calendar.card.calendarTitle')}</CardTitle>
+                    <CardDescription>{t('calendar.card.calendarDescription')}</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="flex justify-center">
@@ -133,22 +122,34 @@ const CalendarPage = () => {
                 </Card>
               </div>
 
+              {/* Права колонка — Події */}
               <div className="w-full">
                 <Card className="h-full shadow-md">
                   <CardHeader>
-                    <CardTitle>Події на {format(selectedDate, 'dd MMMM yyyy')}</CardTitle>
+                    <CardTitle>
+                      {t('calendar.card.eventsTitle', {
+                        date: format(selectedDate, 'dd MMMM yyyy')
+                      })}
+                    </CardTitle>
                     <CardDescription>
                       {filteredEvents.length === 0
-                        ? 'Немає подій на цю дату.'
-                        : `Знайдено ${filteredEvents.length} подій`}
+                        ? t('calendar.card.noEvents')
+                        : t('calendar.card.eventCount', { count: filteredEvents.length })}
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {filteredEvents.map((event) => (
                       <div key={event.id} className="border rounded-xl p-4 space-y-1">
                         <div className="flex items-center justify-between">
-                          <h3 className="font-semibold text-base">{event.title}</h3>
-                          {getBadge(event.type)}
+                          {/* Використовуємо t() для перекладу заголовку */}
+                          <h3 className="font-semibold text-base">{t(event.title)}</h3>
+                          {/* Badge з перекладом */}
+                          <Badge variant={
+                            event.type === 'task' ? 'secondary' :
+                            event.type === 'meeting' ? 'default' : 'destructive'
+                          }>
+                            {t(`calendar.eventTypes.${event.type}`)}
+                          </Badge>
                         </div>
                         <p className="text-muted-foreground text-sm">
                           {format(new Date(event.date), 'HH:mm')}
@@ -179,7 +180,7 @@ const CalendarPage = () => {
                   <Card key={i} className="shadow-sm">
                     <CardHeader className="flex items-start justify-between">
                       <Icon className="text-blue-500 w-5 h-5" />
-                      {i === 3 && <Badge variant="outline">Coming Soon</Badge>}
+                      {i === 3 && <Badge variant="outline">{t('calendar.badge.comingSoon')}</Badge>}
                     </CardHeader>
                     <CardContent>
                       <CardTitle className="text-base">{titles[i]}</CardTitle>
@@ -190,7 +191,6 @@ const CalendarPage = () => {
               })}
             </div>
           </div>
-
         </main>
       </div>
     </div>

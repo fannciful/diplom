@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -23,38 +22,39 @@ const chapters = [
 const getStatusIcon = (status: string) => {
   switch (status) {
     case 'completed':
-      return <CheckCircle className="w-4 h-4 text-green-500" />;
+      return <CheckCircle className="w-4 h-4 text-[var(--primary)]" />;
     case 'review':
-      return <Clock className="w-4 h-4 text-yellow-500" />;
+      return <Clock className="w-4 h-4 text-[var(--secondary)]" />;
     case 'inProgress':
-      return <FileText className="w-4 h-4 text-blue-500" />;
+      return <FileText className="w-4 h-4 text-[var(--accent)]" />;
     default:
-      return <AlertCircle className="w-4 h-4 text-gray-400" />;
+      return <AlertCircle className="w-4 h-4 text-[var(--muted-foreground)]" />;
   }
 };
 
-const ThesisPage = () => {
+const ThesisTracker = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen bg-background flex">
-      <div className="hidden md:block sticky top-0 h-screen">
+    <div className="min-h-screen bg-[var(--background)] flex text-[var(--foreground)]">
+      <div className="hidden md:block sticky top-0 h-screen bg-[var(--sidebar)] border-r border-[var(--sidebar-border)]">
         <Sidebar />
       </div>
 
       <div className="flex-1 flex flex-col h-screen">
-        <div className="sticky top-0 z-10">
+        <div className="sticky top-0 z-10 bg-[var(--card)] border-b border-[var(--border)]">
           <Header />
         </div>
 
-        <main className="flex-1 overflow-y-auto">
+        <main className="flex-1 overflow-y-auto bg-[var(--background)]">
           <div className="max-w-6xl mx-auto py-6 px-4 space-y-6 pb-20">
-            <Card>
+            {/* Основна карточка з інформацією про роботу */}
+            <Card className="bg-[var(--card)] text-[var(--card-foreground)]">
               <CardHeader>
                 <CardTitle className="text-lg md:text-xl">
                   {t('thesis.cardTitle')}
                 </CardTitle>
-                <CardDescription className="text-sm text-muted-foreground mt-1">
+                <CardDescription className="text-sm text-[var(--muted-foreground)] mt-1">
                   {t('thesis.supervisor')}
                 </CardDescription>
               </CardHeader>
@@ -69,21 +69,21 @@ const ThesisPage = () => {
                     </p>
                   </div>
                   <div className="text-right">
-                    <div className="text-3xl font-bold text-blue-600">65%</div>
-                    <p className="text-sm text-gray-500">{t('thesis.progress')}</p>
+                    <div className="text-3xl font-bold text-[var(--primary)]">65%</div>
+                    <p className="text-sm text-[var(--muted-foreground)]">{t('thesis.progress')}</p>
                   </div>
                 </div>
-                <Progress value={65} className="h-2" />
+                <Progress value={65} className="h-2 bg-[var(--muted)]" />
                 <div className="flex gap-3 flex-wrap">
-                  <Button>
+                  <Button className="bg-[var(--primary)] text-[var(--primary-foreground)] hover:bg-[var(--primary-foreground)] hover:text-[var(--primary)]">
                     <MessageSquare className="w-4 h-4 mr-2" />
                     {t('index.chatWithSupervisor')}
                   </Button>
-                  <Button variant="outline">
+                  <Button variant="outline" className="border-[var(--border)] text-[var(--foreground)] hover:bg-[var(--secondary)] hover:text-[var(--secondary-foreground)]">
                     <Calendar className="w-4 h-4 mr-2" />
                     {t('index.planner')}
                   </Button>
-                  <Button variant="outline">
+                  <Button variant="outline" className="border-[var(--border)] text-[var(--foreground)] hover:bg-[var(--secondary)] hover:text-[var(--secondary-foreground)]">
                     <Download className="w-4 h-4 mr-2" />
                     {t('thesis.export')}
                   </Button>
@@ -91,35 +91,36 @@ const ThesisPage = () => {
               </CardContent>
             </Card>
 
-            <Card>
+            {/* Карточка прогресу по главах */}
+            <Card className="bg-[var(--card)] text-[var(--card-foreground)]">
               <CardHeader>
                 <CardTitle>{t('index.projectProgress')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 {chapters.map((chapter) => (
-                  <div key={chapter.id} className="border-b pb-4 last:border-none last:pb-0">
+                  <div key={chapter.id} className="border-b border-[var(--border)] pb-4 last:border-none last:pb-0">
                     <div className="flex items-start justify-between">
                       <div className="flex items-center gap-3">
                         {getStatusIcon(chapter.status)}
                         <div>
-                          <p className="font-medium text-gray-900">
+                          <p className="font-medium text-[var(--foreground)]">
                             {t(`thesis.chapters.${chapter.key}`)}
                           </p>
-                          <p className="text-sm text-gray-600">
+                          <p className="text-sm text-[var(--muted-foreground)]">
                             {t(`thesis.chapterDescriptions.${chapter.key}`)}
                           </p>
                         </div>
                       </div>
-                      <span className="text-sm text-muted-foreground">{chapter.progress}%</span>
+                      <span className="text-sm text-[var(--muted-foreground)]">{chapter.progress}%</span>
                     </div>
-                    <Progress value={chapter.progress} className="h-2 mt-2" />
+                    <Progress value={chapter.progress} className="h-2 mt-2 bg-[var(--muted)]" />
                     <div className="flex gap-2 mt-3">
-                      <Button size="sm" variant="outline">
+                      <Button size="sm" variant="outline" className="border-[var(--border)] text-[var(--foreground)] hover:bg-[var(--secondary)] hover:text-[var(--secondary-foreground)]">
                         <FileText className="w-4 h-4 mr-1" />
                         {t('thesis.actions.file')}
                       </Button>
                       {chapter.status === 'inProgress' && (
-                        <Button size="sm">
+                        <Button size="sm" className="bg-[var(--primary)] text-[var(--primary-foreground)] hover:bg-[var(--primary-foreground)] hover:text-[var(--primary)]">
                           {t('thesis.actions.sendForReview')}
                         </Button>
                       )}
@@ -135,4 +136,4 @@ const ThesisPage = () => {
   );
 };
 
-export default ThesisPage;
+export default ThesisTracker;

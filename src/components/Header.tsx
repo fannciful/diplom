@@ -7,7 +7,7 @@ import {
   Plus,
   Menu
 } from 'lucide-react';
-import { useTheme } from '@/hooks/useTheme';
+import { useTheme } from '@/context/ThemeContext';
 import {
   Select,
   SelectTrigger,
@@ -44,7 +44,7 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Actions + language */}
+        {/* Actions */}
         <div className="hidden md:flex items-center gap-6">
           <Button
             variant="outline"
@@ -60,14 +60,13 @@ const Header = () => {
               <SelectValue placeholder={t('header.theme')} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="light">light</SelectItem>
-              <SelectItem value="dark">dark</SelectItem>
-              <SelectItem value="rose">rose</SelectItem>
-              <SelectItem value="mint">mint</SelectItem>
+              <SelectItem value="light">Light</SelectItem>
+              <SelectItem value="dark">Dark</SelectItem>
+              <SelectItem value="rose">Rose</SelectItem>
+              <SelectItem value="mint">Mint</SelectItem>
             </SelectContent>
           </Select>
 
-          {/* Language toggle */}
           <Button
             variant="ghost"
             size="sm"

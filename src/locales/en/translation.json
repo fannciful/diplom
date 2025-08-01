@@ -18,7 +18,7 @@
     "calendar": "Calendar",
     "aiAssistant": "AI Assistant",
     "analytics": "Analytics",
-    "bookmarks": "Bookmarks",
+    "resources": "Resources",
     "documents": "Documents",
     "team": "Team",
     "notifications": "Notifications",
@@ -108,7 +108,7 @@
       "student2": "Got it, thanks! I'll finish up the material and send it to you for review by the end of the week. Have a great day!"
     }
   },
-   "thesis": {
+  "thesis": {
     "cardTitle": "Diploma project",
     "supervisor": "Supervisor",
     "startDate": "Start",
@@ -150,17 +150,17 @@
       "file": "File"
     }
   },
-   "profile": {
-  "title": "User profile",
-  "subtitle": "Edit your personal data",
-  "name": "Name",
-  "namePlaceholder": "Enter your name",
-  "email": "Email",
-  "emailPlaceholder": "Enter your email",
-  "role": "Role",
-  "rolePlaceholder": "Enter status",
-  "save": "Save changes"
-},
+  "profile": {
+    "title": "User profile",
+    "subtitle": "Edit your personal data",
+    "name": "Name",
+    "namePlaceholder": "Enter your name",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email",
+    "role": "Role",
+    "rolePlaceholder": "Enter status",
+    "save": "Save changes"
+  },
   "aiAssistant": {
     "title": "AI Assistant",
     "description": "Artificial intelligence to improve your scientific work",
@@ -232,20 +232,96 @@
     }
   },
   "calendar": {
-    "title": "Calendar",
-    "description": "Manage your events, deadlines, and meetings",
+    "pageTitle": "Calendar",
+    "pageDescription": "Manage events, deadlines, and meetings in one place.",
+    "card": {
+      "calendarTitle": "Calendar",
+      "calendarDescription": "Select a date to view events or create new ones.",
+      "eventsTitle": "Events on {{date}}",
+      "eventsDescription": "Your events for the selected date.",
+      "noEvents": "No events.",
+      "eventCount_one": "{{count}} events",
+      "eventCount_few": "{{count}} events",
+      "eventCount_many": "{{count}} events"
+    },
+    "button": {
+      "addEvent": "Add event",
+      "viewMore": "View all"
+    },
+    "eventTypes": {
+      "meeting": "Meeting",
+      "deadline": "Deadline",
+      "task": "Task"
+    },
     "features": {
       "upcoming": "Upcoming events",
-      "tasks": "Tasks", 
+      "tasks": "Task",
       "addEvent": "Add event",
       "deadlines": "Deadlines",
       "upcomingDesc": "Review upcoming meetings and deadlines",
       "tasksDesc": "Your planned tasks",
       "addEventDesc": "Quickly create a new event",
-      "deadlineDesc": "Monitoring important deadlines"
+      "deadlinesDesc": "Monitoring important deadlines"
     },
-    "button": {
-      "addEvent": "Add event"
+    "badge": {
+      "comingSoon": "Soon"
+    },
+    "mockEvents": {
+      "meeting1": "Consultation with the manager",
+      "deadline1": "Submit the first section",
+      "task1": "Interim testing"
+    }
+  },
+   "analytics": {
+    "title": "Analytics",
+    "description": "Review your project's key metrics",
+    "lastUpdated": "Just updated",
+    "visits": "Visits",
+    "thisMonth": "this month",
+    "conversions": "Conversions",
+    "growthRate": "growth rate",
+    "bounceRate": "Failure rate",
+    "low": "low level",
+    "averageTime": "Average time",
+    "perVisit": "on visits",
+    "trafficOverview": "Traffic overview",
+    "lineChartDescription": "Visits by month",
+    "departmentStats": "Distribution by departments",
+    "pieChartDescription": "Percentage distribution of tasks"
+  },
+  "resources": {
+  "title": "Materials for coursework/thesis",
+  "cards": {
+    "templates": {
+      "title": "Design samples",
+      "description": "Rules for formatting coursework and theses (titles, tables, references, etc.).",
+      "action": "View"
+    },
+    "examples": {
+      "title": "Examples of works",
+      "description": "Ready-made examples of previous coursework and thesis projects.",
+      "action": "View"
+    },
+    "guidelines": {
+      "title": "Methodological guidelines",
+      "description": "Official instructions and guidelines for completing coursework and dissertations.",
+      "action": "Download"
+    },
+    "literature": {
+      "title": "Useful literature",
+      "description": "A selection of books, articles, and online resources for a deeper understanding of the topic.",
+      "action": "Open list"
+    },
+    "faq": {
+      "title": "Frequently asked questions (FAQ)",
+      "description": "Answers to frequently asked questions about the structure, content, and protection of the work.",
+      "action": "View FAQ"
+    },
+    "defense": {
+      "title": "Tips for protection",
+      "description": "How to effectively prepare for defense and present your work.",
+      "action": "Detailed"
     }
   }
+}
 }

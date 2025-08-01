@@ -8,15 +8,13 @@ import {
   Home,
   FileText,
   MessageSquare,
-  Bell,
   Calendar,
-  Settings,
   TrendingUp,
   Zap,
   LogOut,
   ChevronRight,
-  Bookmark,
-  Search
+  Search,
+  Book 
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
@@ -65,9 +63,9 @@ const Sidebar = () => {
       badge: null
     },
     {
-      title: t('sidebar.bookmarks'),
-      href: '/bookmarks',
-      icon: Bookmark,
+      title: t('sidebar.resources'),
+      href: '/resources',
+      icon: Book,
       badge: null
     }
   ];
@@ -151,29 +149,9 @@ const Sidebar = () => {
             ))}
           </nav>
         </div>
-
-        <Separator />
-
-        <div className="space-y-2">
-          <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide px-3 mb-3">
-            {t('sidebar.sectionActions')}
-          </h2>
-          <div className="space-y-2">
-            <Button variant="outline" size="sm" className="w-full justify-start">
-              <Bell className="mr-2 h-4 w-4" />
-              {t('sidebar.notifications')}
-              <Badge variant="destructive" className="ml-auto h-5 px-2">
-                5
-              </Badge>
-            </Button>
-            <Button variant="outline" size="sm" className="w-full justify-start">
-              <Settings className="mr-2 h-4 w-4" />
-              {t('sidebar.settings')}
-            </Button>
-          </div>
-        </div>
       </div>
 
+      {/* Profile Section */}
       <div className="p-4 border-t">
         <Link
           to="/profile"
